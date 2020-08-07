@@ -6,7 +6,7 @@ const app = express()
 
 const PORT = process.env.PORT || 8000
 
-app.use('api/auth', require('./routes/auth.routes'))
+app.use('/api/auth', require('./routes/auth.routes'))
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
