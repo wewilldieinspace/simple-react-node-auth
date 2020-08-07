@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "target": "ES2016",
+    "jsx": "react",
+    "module": "CommonJS",
+    "strict": true,
+    "lib": ["es6", "dom"]
+  },
+  "exclude": [
+    "./node_modules",
+    "./.idea",
+    "./dist"
+  ]
+}
