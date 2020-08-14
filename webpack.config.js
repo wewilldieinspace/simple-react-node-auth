@@ -1,5 +1,6 @@
 const path = require('path')
 
+
 module.exports = {
     entry: './src/index.tsx',
     output: {
@@ -25,10 +26,10 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        post: 5000,
+        port: 5000,
         hot: true,
         inline: true,
         historyApiFallback: true
     },
-    devtool: 'source-map'
+    devtool: 'source-map',
 }

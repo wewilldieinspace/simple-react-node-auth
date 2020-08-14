@@ -4,7 +4,10 @@
   "description": "Simple node/react authentication",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "webpack-dev-server",
+    "server": "npm start --prefix server",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,7 @@
     "mongoose",
     "jwt"
   ],
-  "author": "¯\\_ (ツ)",
+  "author": "wewilldieinspace",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/wewilldieinspace/simple-react-node-auth/issues"
@@ -26,6 +29,7 @@
   "homepage": "https://github.com/wewilldieinspace/simple-react-node-auth#readme",
   "dependencies": {
     "@material-ui/core": "4.11.0",
+    "@material-ui/lab": "4.0.0-alpha.56",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-router-dom": "5.2.0"
@@ -38,6 +42,7 @@
     "@types/react-dom": "16.9.8",
     "@types/react-router-dom": "5.1.5",
     "babel-loader": "8.1.0",
+    "concurrently": "5.3.0",
     "ts-loader": "8.0.2",
     "typescript": "3.9.7",
     "webpack": "4.44.1",
