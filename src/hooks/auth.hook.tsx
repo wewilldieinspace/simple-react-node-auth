@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 
+let storage = 'user'
+
 
 export const useAuth = () => {
     const [username, setUsername] = useState(null)
@@ -9,20 +11,26 @@ export const useAuth = () => {
         setUsername(username)
         setToken(token)
 
-        localStorage.setItem('user', JSON.stringify({
+        localStorage.setItem(storage, JSON.stringify({
             username, token
         }))
     }, [])
 
-    useEffect(() => {
-        const storage: any = localStorage.getItem('user')
-        const userData = JSON.parse(storage)
+    const logout = useCallback(() => {
+        setUsername(null)
+        setToken(null)
+        localStorage.removeItem(storage)
+    }, [])
 
-        if (userData || userData?.username) {
+    useEffect(() => {
+        const userStorage: any = localStorage.getItem(storage)
+        const userData = JSON.parse(userStorage)
+
+        if (userData || userData?.token) {
             login(userData.username, userData.token)
         }
 
     }, [login])
 
-    return { login, token, username }
+    return { login, logout, token, username }
 }

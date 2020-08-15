@@ -12,8 +12,8 @@ router.post(
     '/login',
     [
         check('username', 'At least don\'t screw up here!')
-            .normalizeEmail().isEmail(),
-        check('password', 'And here').notEmpty()
+            .exists(),
+        check('password', 'You screwed up!').exists()
     ],
     async (req, res) => {
         try {
@@ -45,13 +45,13 @@ router.post(
             }
 
             const token = jwt.sign(
-                { uId: user.id },
+                { username },
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             )
 
             return res.json({
-                token, uId: user.id
+                username, token
             })
         } catch (e) {
             return res.status(500).json({
@@ -71,12 +71,7 @@ router.post(
     ],
     async (req, res) => {
         try {
-
-            console.log('here we go again')
-
             const errors = validationResult(req)
-
-            console.log('validationResult: ', errors)
 
             if (!errors.isEmpty()) {
                 return res.status(400).json({
@@ -103,10 +98,14 @@ router.post(
 
             await user.save()
 
-            console.log('all done')
+            const token = jwt.sign(
+                { username },
+                process.env.JWT_SECRET,
+                { expiresIn: '1h' }
+            )
 
-            return res.status(201).json({
-                message: 'I\'m proud of you'
+            return res.json({
+                username, token
             })
         } catch (e) {
             console.log('error: ', e.message)

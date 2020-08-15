@@ -12,22 +12,21 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { useStyles } from '../style/useStyles'
-// Components
 
 
 
 export const App = () => {
     const classes = useStyles()
-    const { login, token, username } = useAuth()
+    const { token, username, login, logout } = useAuth()
     const isAuth = !!token
     const routes = useRoutes(isAuth)
 
     return (
         <AuthContext.Provider
-            value={{ username, token, login }}
+            value={{ username, token, login, logout }}
         >
             <Router>
-                <Container component="main" maxWidth="xs">
+                <Container component='main' maxWidth='xs'>
                     <CssBaseline />
                     <div className={classes.paper}>
 
@@ -35,11 +34,14 @@ export const App = () => {
 
                     </div>
                     <Box mt={5}>
-                        <Typography variant="body2" color="textSecondary" align="center">
+                        <Typography variant='body2' color='textSecondary' align='center'>
                             {'Copyright © '}
-                            <Link color="inherit" href="https://github.com/wewilldieinspace">
+                            <Link
+                                color='inherit'
+                                href='https://github.com/wewilldieinspace/simple-react-node-auth'
+                            >
                                 ¯\_(ツ)_/¯
-                            </Link>{' '}
+                            </Link>
                         </Typography>
                     </Box>
                 </Container>

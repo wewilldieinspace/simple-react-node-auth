@@ -1,23 +1,25 @@
 import * as React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 // Components
 import { signin } from './components/signin'
 import { signup } from './components/signup'
+import { main } from './components/main'
 
 
 export const useRoutes = (isAuth: boolean) => {
-    if (isAuth) {
+    if (!isAuth) {
         return (
             <Switch>
-
-            </Switch>
-        )
-    } else {
-        return (
-            <Switch>
-                <Route exact path='/' component={signup} />
+                <Route exact path='/register' component={signup} />
                 <Route exact path='/login' component={signin} />
+                <Redirect to='/register' />
             </Switch>
         )
     }
+        return (
+            <Switch>
+                <Route exact path='/main' component={main} />
+                <Redirect to='/main' />
+            </Switch>
+        )
 }
